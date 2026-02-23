@@ -51,6 +51,7 @@ void BankAccount::setAccountHolderName(std::string name) {
 void BankAccount::deposit(double amount) {
     if (amount > 0) {
         balance += amount;
+        transactionHistory.push_back({"Deposit", amount, "02/22/2026"});
     }
 }
 
@@ -58,6 +59,14 @@ void BankAccount::deposit(double amount) {
 void BankAccount::withdraw(double amount) {
     if (amount > 0 && amount <= balance) {
         balance -= amount;
+        transactionHistory.push_back({"Withdrawal", amount, "02/22/2026"});
+    }
+}
+
+void BankAccount::printHistory() {
+    std::cout << "Transaction History for Account: " << accountNumber << std::endl;
+    for (const auto& transaction : transactionHistory) {
+        std::cout << "  " << transaction.timestamp << " - " << transaction.type << ": $" << transaction.amount << std::endl;
     }
 }
 

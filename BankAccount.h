@@ -6,13 +6,21 @@
 #define OBJECTS_CLASSES_LAB_BANKACCOUNT_H
 
 #include <string>
+#include <vector>
 
 // Class declaration
+struct Transaction {
+    std::string type;      // e.g., "Deposit" or "Withdrawal"
+    double amount;
+    std::string timestamp; // For now, you can just use a simple string like "02/22/2025"
+};
+
 class BankAccount {
 private:
     std::string accountNumber;
     std::string accountHolderName;
     double balance;
+    std::vector<Transaction> transactionHistory;
 
 public:
     virtual ~BankAccount() = default; // Virtual destructor
@@ -47,6 +55,7 @@ public:
     // Methods for depositing and withdrawing money
     void deposit(double amount);
     virtual void withdraw(double amount);
+    void printHistory();
 };
 
 // Non-member operators for expressions like `newAccount = oldAccount + 50;`

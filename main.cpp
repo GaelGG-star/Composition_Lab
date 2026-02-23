@@ -18,8 +18,9 @@ void displayMenu() {
     std::cout << "4. Display account details" << std::endl;
     std::cout << "5. Compare two accounts" << std::endl;
     std::cout << "6. Calculate interest for a savings account" << std::endl;
-    std::cout << "7. Demonstrate Polymorphism" << std::endl;
-    std::cout << "8. Exit" << std::endl;
+    std::cout << "7. Print transaction history for an account" << std::endl;
+    std::cout << "8. Demonstrate Polymorphism" << std::endl;
+    std::cout << "9. Exit" << std::endl;
     std::cout << "Enter your choice: ";
 }
 
@@ -222,13 +223,23 @@ int main() {
                 std::cout << "Account not found." << std::endl;
             }
         } else if (choice == 7) {
-            demonstratePolymorphism();
+            std::string accNum;
+            std::cout << "Enter account number to print history: ";
+            std::cin >> accNum;
+            BankAccount* account = findAccount(accounts, accNum);
+            if (account) {
+                account->printHistory();
+            } else {
+                std::cout << "Account not found." << std::endl;
+            }
         } else if (choice == 8) {
+            demonstratePolymorphism();
+        } else if (choice == 9) {
             std::cout << "Exiting program. Goodbye!" << std::endl;
         } else {
             std::cout << "Invalid choice. Please select a valid option." << std::endl;
         }
-    } while (choice != 8);
+    } while (choice != 9);
 
     return 0;
 }
